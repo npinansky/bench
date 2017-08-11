@@ -1,0 +1,8 @@
+#suites:
+#  benchmark:
+#    namespace: Benchmark
+#    psr4_prefix: Benchmark
+#    src_path: src
+extensions:
+  Memio\SpecGen\MemioSpecGenExtension: ~
+

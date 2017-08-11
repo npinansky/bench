@@ -1,0 +1,25 @@
+{
+    "name": "npinansky/bench",
+    "description": "Code Benchmark Utility",
+    "require": {
+        "phpunit/phpunit": "^6.3",
+        "phpspec/phpspec": "^4.0"
+    },
+    "minimum-stability": "dev",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Nick Pinansky",
+            "email": "pinansky@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "ciaranmcnulty/phpspec-typehintedmethods": "^3.0",
+        "memio/spec-gen": "^0.8"
+    },
+    "autoload": {
+        "psr-0": {
+            "Benchmark\\":"src"
+        }
+    }
+}
