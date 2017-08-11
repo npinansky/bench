@@ -20,6 +20,11 @@ interface ReportInterface
     public function setResults(ComparitorResultsInterface $results): self;
 
     /**
+     * @return ComparitorResultsInterface
+     */
+    public function getResults(): ComparitorResultsInterface;
+
+    /**
      * Add a column (calculation type) to the report (eg. max, min, avg, stddev, total)
      * @param ReportColumnInterface $column
      * @return ReportInterface
@@ -37,7 +42,7 @@ interface ReportInterface
      * Get a list of columns
      * @return ReportColumnInterface[]
      */
-    public function getColumsn(): array;
+    public function getColumns(): array;
 
     /**
      * Set which column to order the report by

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spec\Benchmark\Reporter;
 
 
+use Benchmark\ReportColumnInterface;
 use Benchmark\ReporterInterface;
 use Benchmark\ReportInterface;
 
@@ -44,6 +45,19 @@ class AbstractReporter implements ReporterInterface
             'rows'  => [],
         ];
 
-        
+        $results = $this->report->getResults();
+
+        foreach ($results->getTestNames() as $testName) {
+            $row = [
+                'title' => $testName,
+                'cols'  => [],
+            ];
+
+            $sample = $results->getTestResults($testName);
+
+            $row['cols'] = array_map(function (ReportColumnInterface $reportColumn) use ($sample) {
+                return $reportColumn->getValue($sample);
+            }, $this->report->getColumns());
+        }
     }
 }
