@@ -4,8 +4,9 @@ namespace Benchmark\Reporter;
 
 use Benchmark\Reporter\Exception\InvalidIOStreamException;
 use Benchmark\ReporterInterface;
+use Benchmark\ReportFormatterInterface;
 use Benchmark\ReportInterface;
-use spec\Benchmark\Reporter\AbstractReporter;
+use Benchmark\Reporter\AbstractReporter;
 
 /**
  * Create a report and return the results to an I/O stream.
@@ -15,11 +16,6 @@ use spec\Benchmark\Reporter\AbstractReporter;
  */
 class IOReporter extends AbstractReporter
 {
-    /**
-     * @var ReporterInterface
-     */
-    private $report;
-
     /**
      * @var resource
      */
@@ -38,5 +34,13 @@ class IOReporter extends AbstractReporter
         }
 
         throw new InvalidIOStreamException();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function run(ReportFormatterInterface $formatter): void
+    {
+        fwrite($this->IOStream, $formatter->formatReport($this->buildReport()));
     }
 }

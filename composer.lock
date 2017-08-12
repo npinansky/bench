@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9836614396ef847ad0d0606f448ac2ba",
-    "content-hash": "456378c36708f643ac8c065914713546",
+    "hash": "c5aa5646320a4c32d397b85b22ee3799",
+    "content-hash": "4672b95e7c8d38e03c51d22aff072134",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -60,6 +60,45 @@
                 "instantiate"
             ],
             "time": "2017-07-22 11:58:36"
+        },
+        {
+            "name": "dwoo/dwoo",
+            "version": "1.3.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dwoo-project/dwoo.git",
+                "reference": "dba4344c5179f184c67dc23e914eedcfa0609c84"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dwoo-project/dwoo/zipball/dba4344c5179f184c67dc23e914eedcfa0609c84",
+                "reference": "dba4344c5179f184c67dc23e914eedcfa0609c84",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3|^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.27"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dwoo\\": "lib/Dwoo/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "David Sanchez",
+                    "email": "david38sanchez@gmail.com"
+                }
+            ],
+            "description": "Dwoo is a PHP5/PHP7 template engine which is (almost) fully compatible with Smarty templates and plugins, but is written from scratch for PHP5, and adds many features.",
+            "time": "2017-03-27 23:25:23"
         },
         {
             "name": "myclabs/deep-copy",

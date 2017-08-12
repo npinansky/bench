@@ -11,6 +11,8 @@ namespace Benchmark;
  */
 interface ReporterInterface
 {
+
+
     /**
      * @param ReportInterface $report
      */
@@ -19,5 +21,5 @@ interface ReporterInterface
     /**
      * Generate report
      */
-    public function run();
+    public function run(ReportFormatterInterface $formatter): void;
 }

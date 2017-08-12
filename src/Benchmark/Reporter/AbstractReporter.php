@@ -2,11 +2,12 @@
 declare(strict_types=1);
 
 
-namespace spec\Benchmark\Reporter;
+namespace Benchmark\Reporter;
 
 
 use Benchmark\ReportColumnInterface;
 use Benchmark\ReporterInterface;
+use Benchmark\ReportFormatterInterface;
 use Benchmark\ReportInterface;
 
 /**
@@ -14,7 +15,7 @@ use Benchmark\ReportInterface;
  * @package spec\Benchmark\Reporter
  * @author Nick Pinansky <pinansky@gmail.com>
  */
-class AbstractReporter implements ReporterInterface
+abstract class AbstractReporter implements ReporterInterface
 {
     /**
      * @var ReportInterface
@@ -33,31 +34,46 @@ class AbstractReporter implements ReporterInterface
     /**
      * {@inheritdoc}
      */
-    abstract public function run();
+    abstract public function run(ReportFormatterInterface $formatter): void;
 
     /**
+     * Build the report array, it is then passed to a formatter
+     * for further processing into a template, json or some other
+     * type of format.
+     *
      * @return array
      */
     protected function buildReport(): array
     {
         $report = [
-            'title' => $this->report->getTitle(),
-            'rows'  => [],
+            'meta' => [
+                'title'     => $this->report->getTitle(),
+                'rows'      => [],
+                'columns'   => [],
+            ],
+            'data' => []
         ];
 
         $results = $this->report->getResults();
 
+        // Build rows (each row represents a test)
         foreach ($results->getTestNames() as $testName) {
-            $row = [
-                'title' => $testName,
-                'cols'  => [],
-            ];
+            $report['meta']['rows'][] = $testName;
 
+            // Retrieve the execution times
             $sample = $results->getTestResults($testName);
 
-            $row['cols'] = array_map(function (ReportColumnInterface $reportColumn) use ($sample) {
-                return $reportColumn->getValue($sample);
-            }, $this->report->getColumns());
+            // Build columns (each column represents a aggregation)
+            foreach ($this->report->getColumns() as $column) {
+                /** @var ReportColumnInterface $column */
+                $colName = $column->getTitle();
+                if (! in_array($colName, $report['meta']['columns'])) {
+                    $report['meta']['columns'][] = $colName;
+                }
+                $report['data'][$testName][$colName] = $column->getValue($sample);
+            }
         }
+
+        return $report;
     }
 }

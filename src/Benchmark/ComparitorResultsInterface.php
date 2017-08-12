@@ -28,9 +28,9 @@ interface ComparitorResultsInterface
 
     /**
      * Get a list of each test names
-     * @return arrary
+     * @return string[]
      */
-    public function getTestNames(): arrary;
+    public function getTestNames(): array;
 
     /**
      * Clear out the population for a given test.

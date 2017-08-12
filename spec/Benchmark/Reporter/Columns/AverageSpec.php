@@ -21,7 +21,7 @@ class AverageSpec extends ObjectBehavior
         $this->beAnInstanceOf(ReportColumnInterface::class);
     }
 
-    public function it_should_create_avg()
+    public function it_should_compute_average()
     {
         $this->getValue(range(1,10))->shouldReturn(5.5);
     }
