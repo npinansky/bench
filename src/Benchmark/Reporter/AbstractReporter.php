@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Benchmark\Reporter;
 
-
 use Benchmark\ReportColumnInterface;
 use Benchmark\Reporter\Exception\MissingColumnsException;
 use Benchmark\Reporter\Exception\MissingRowsException;

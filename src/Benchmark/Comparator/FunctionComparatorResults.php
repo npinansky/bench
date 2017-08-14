@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Benchmark\Comparator;
 
-
 use Benchmark\ComparatorResultsInterface;
 
 /**
@@ -24,7 +23,7 @@ class FunctionComparatorResults implements ComparatorResultsInterface
      */
     public function __construct(array $results = null)
     {
-        if ( $results !== null) {
+        if ($results !== null) {
             if (! $this->isAssoc($results)) {
                 throw new \InvalidArgumentException('Input array must contain test name as keys');
             }

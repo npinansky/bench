@@ -8,7 +8,7 @@ namespace Benchmark\Reporter\Exception;
  * Thrown when the user tries to pass a bad resource as the I/O stream to an IOReporter
  * Class InvalidIOStreamException
  * @package Benchmark\Reporter\Exception
- * @author Nick Pinansky <nicholas.pinansky@wbdcorp.com>
+ * @author Nick Pinansky <pinansky@gmail.com>
  */
 class InvalidIOStreamException extends \Exception
 {

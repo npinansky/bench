@@ -45,8 +45,8 @@ class FunctionComparator implements ComparatorInterface
 
         // run each test N times
         foreach ($this->tests as $testName => $testFunc) {
-            foreach (range(1,$iterations) as $i) {
-                $this->results->addTestResult($testName,$this->bench($testFunc));
+            for ($i = 0; $i < $iterations; $i++) {
+                $this->results->addTestResult($testName, $this->bench($testFunc));
             }
         }
 

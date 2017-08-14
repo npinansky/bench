@@ -11,8 +11,6 @@ namespace Benchmark;
  */
 interface ReporterInterface
 {
-
-
     /**
      * @param ReportInterface $report
      */

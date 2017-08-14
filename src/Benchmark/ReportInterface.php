@@ -61,5 +61,4 @@ interface ReportInterface
      * @return string
      */
     public function getTitle(): string;
-
 }
