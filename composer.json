@@ -22,5 +22,11 @@
         "psr-0": {
             "Benchmark\\":"src"
         }
+    },
+    "scripts": {
+       "post-install-cmd": [
+         "vendor/bin/phpunit tests/",
+         "vendor/bin/phpspec run spec/"
+       ]
     }
 }
