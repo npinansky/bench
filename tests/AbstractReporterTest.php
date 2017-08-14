@@ -40,8 +40,8 @@ class AbstractReporterTest extends \PHPUnit\Framework\TestCase
             }))->willReturn(1);
 
         // Create Test Results
-        /** @var \Benchmark\ComparitorResultsInterface $mockResults */
-        $mockResults = $this->getMockBuilder(\Benchmark\ComparitorResultsInterface::class)
+        /** @var \Benchmark\ComparatorResultsInterface $mockResults */
+        $mockResults = $this->getMockBuilder(\Benchmark\ComparatorResultsInterface::class)
             ->setMethods(['getTestResults','getTestNames'])
             ->getMockForAbstractClass();
 
@@ -64,7 +64,7 @@ class AbstractReporterTest extends \PHPUnit\Framework\TestCase
             ->method('getTitle')
             ->willReturn('REPORT_TITLE');
 
-        // Return a ComparitorResults object
+        // Return a ComparatorResults object
         $mockReport->expects($this->once())
             ->method('getResults')
             ->willReturn($mockResults);

@@ -14,15 +14,15 @@ interface ReportInterface
 {
     /**
      * Add the popultion of run times (rows) to the report
-     * @param ComparitorResultsInterface $results
+     * @param ComparatorResultsInterface $results
      * @return ReportInterface
      */
-    public function setResults(ComparitorResultsInterface $results): self;
+    public function setResults(ComparatorResultsInterface $results): self;
 
     /**
-     * @return ComparitorResultsInterface
+     * @return ComparatorResultsInterface
      */
-    public function getResults(): ComparitorResultsInterface;
+    public function getResults(): ComparatorResultsInterface;
 
     /**
      * Add a column (calculation type) to the report (eg. max, min, avg, stddev, total)

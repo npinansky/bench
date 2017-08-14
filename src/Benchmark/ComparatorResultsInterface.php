@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Benchmark;
 
 /**
- * Interface ComparitorResultsInterface
+ * Interface ComparatorResultsInterface
  * @package Benchmark
  * @author Nick Pinansky <nicholas.pinansky@wbdcorp.com>
  */
-interface ComparitorResultsInterface
+interface ComparatorResultsInterface
 {
     /**
      * Add the result of a test run.
      * @param string $name
      * @param float $time
-     * @return ComparitorResultsInterface
+     * @return ComparatorResultsInterface
      */
     public function addTestResult(string $name, float $time): self;
 
@@ -35,7 +35,7 @@ interface ComparitorResultsInterface
     /**
      * Clear out the population for a given test.
      * @param string $name
-     * @return ComparitorResultsInterface
+     * @return ComparatorResultsInterface
      */
     public function removeResults(string $name): self;
 }
