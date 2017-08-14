@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 namespace Benchmark;
+
 use Benchmark\Comparator\FunctionComparator;
 use Benchmark\Comparator\FunctionComparatorResults;
 use Benchmark\Reporter\BasicReport;
@@ -24,7 +25,7 @@ class BenchIntegrationTest extends \PHPUnit\Framework\TestCase
     {
         $comp = new FunctionComparator(new FunctionComparatorResults());
 
-        $arr = range(1,100);
+        $arr = range(1, 100);
 
         // Create three spy variables used to measure the number of executions
         // of each test function, since incrementing each spy should take the same
@@ -33,22 +34,22 @@ class BenchIntegrationTest extends \PHPUnit\Framework\TestCase
         list($spyFor, $spyForEach, $spyMap) = [0,0,0];
 
 
-        $comp->addFunction('map', function() use($arr, &$spyMap){
+        $comp->addFunction('map', function () use ($arr, &$spyMap) {
             ++$spyMap;
-            $res = array_map(function($elm) {
+            $res = array_map(function ($elm) {
                 return ++$elm; // prefix should faster than postfix
             }, $arr);
         });
 
-        $comp->addFunction('foreach', function() use ($arr, &$spyForEach) {
+        $comp->addFunction('foreach', function () use ($arr, &$spyForEach) {
             ++$spyForEach;
             $res = [];
             foreach ($arr as $item) {
-               $res[] = ++$item;
-           }
+                $res[] = ++$item;
+            }
         });
 
-        $comp->addFunction('for', function() use ($arr, &$spyFor) {
+        $comp->addFunction('for', function () use ($arr, &$spyFor) {
             ++$spyFor;
             $res = [];
             for ($i = 0; $i < count($arr); $i++) {
@@ -62,12 +63,12 @@ class BenchIntegrationTest extends \PHPUnit\Framework\TestCase
         // check that our tests were run the N times we expected
         $errMsg = '%s loop expected to be executed %d times';
         $this->assertEquals($numTestCycles, $spyFor, sprintf($errMsg, 'for', $numTestCycles));
-        $this->assertEquals($numTestCycles, $spyForEach,sprintf($errMsg, 'for each', $numTestCycles));
+        $this->assertEquals($numTestCycles, $spyForEach, sprintf($errMsg, 'for each', $numTestCycles));
         $this->assertEquals($numTestCycles, $spyMap, sprintf($errMsg, 'map', $numTestCycles));
 
         // validate results
-        $this->assertInstanceOf( FunctionComparatorResults::class, $results);
-        $this->assertInstanceOf( ComparatorResultsInterface::class, $results);
+        $this->assertInstanceOf(FunctionComparatorResults::class, $results);
+        $this->assertInstanceOf(ComparatorResultsInterface::class, $results);
 
 
         $this->assertCount($numTestCycles, $results->getTestResults('for'));
@@ -96,7 +97,9 @@ class BenchIntegrationTest extends \PHPUnit\Framework\TestCase
 
 
         $templateEngine = new Core();
-        $templateEngine->addPlugin('tab', function() { return "\t";}, false);
+        $templateEngine->addPlugin('tab', function () {
+            return "\t";
+        }, false);
 
 
         $ioStream = fopen('php://stdout', 'w+');
@@ -136,8 +139,5 @@ class BenchIntegrationTest extends \PHPUnit\Framework\TestCase
                 $this->assertInternalType('float', $arrReport['data'][$key][$col]);
             }
         }
-
     }
 }
-
-

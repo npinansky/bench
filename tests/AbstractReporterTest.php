@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+namespace Benchmark;
 
 use Benchmark\Reporter\AbstractReporter;
 
@@ -102,7 +103,7 @@ class AbstractReporterTest extends \PHPUnit\Framework\TestCase
                 // Check "columns" sub-elem of metadata block
                 $this->assertArrayHasKey('columns', $res['meta']);
                 $this->assertInternalType('array', $res['meta']['columns']);
-                $this->assertCount(1,$res['meta']['columns']);
+                $this->assertCount(1, $res['meta']['columns']);
                 $this->assertEquals('Total', $res['meta']['columns'][0]);
 
 
@@ -113,19 +114,20 @@ class AbstractReporterTest extends \PHPUnit\Framework\TestCase
                 // Validate "TEST_NAME" sub-elem
                 $this->assertArrayHasKey('TEST_NAME', $res['data']);
                 $this->assertInternalType('array', $res['data']['TEST_NAME']);
-                $this->assertCount(1,$res['data']['TEST_NAME']);
+                $this->assertCount(1, $res['data']['TEST_NAME']);
 
                 // Validate columns sub-elem of TEST_NAME
                 $this->assertArrayHasKey('Total', $res['data']['TEST_NAME']);
-                $this->assertInternalType(\PHPUnit\Framework\Constraint\IsType::TYPE_NUMERIC,
-                    $res['data']['TEST_NAME']['Total']);
+                $this->assertInternalType(
+                    \PHPUnit\Framework\Constraint\IsType::TYPE_NUMERIC,
+                    $res['data']['TEST_NAME']['Total']
+                );
                 $this->assertEquals(1, $res['data']['TEST_NAME']['Total']);
 
                 return true;
             }));
 
         $this->subject->run($mockFormatter);
-
     }
 }
 

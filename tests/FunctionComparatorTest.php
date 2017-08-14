@@ -1,8 +1,14 @@
 <?php
 declare(strict_types=1);
+namespace Benchmark;
 
 use Benchmark\Comparator\FunctionComparator;
 use Benchmark\Comparator\FunctionComparatorResults;
+
+/**
+ * Class FunctionComparatorTest
+ * @author Nick Pinansky <pinansky@gmail.com>
+ */
 class FunctionComparatorTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -24,10 +30,10 @@ class FunctionComparatorTest extends \PHPUnit\Framework\TestCase
         $testRuns = 0;
 
         $this->subject->addFunction('test', function () use (&$testRuns) {
-           ++$testRuns;
+            ++$testRuns;
         });
 
-        $runs = (int) rand(2,100); // pick a random number of executions
+        $runs = (int) rand(2, 100); // pick a random number of executions
 
         $this->subject->compare($runs);
 
