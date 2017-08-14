@@ -50,7 +50,7 @@ class AbstractReporterTest extends \PHPUnit\Framework\TestCase
             ->with($this->equalTo('TEST_NAME'))
             ->willReturn([1,2,3]);
 
-        $mockResults->expects($this->once())
+        $mockResults->expects($this->atLeastOnce())
             ->method('getTestNames')
             ->willReturn(['TEST_NAME']);
 
@@ -65,12 +65,12 @@ class AbstractReporterTest extends \PHPUnit\Framework\TestCase
             ->willReturn('REPORT_TITLE');
 
         // Return a ComparatorResults object
-        $mockReport->expects($this->once())
+        $mockReport->expects($this->atLeastOnce())
             ->method('getResults')
             ->willReturn($mockResults);
 
         // Return a column object(s)
-        $mockReport->expects($this->once())
+        $mockReport->expects($this->atLeastOnce())
             ->method('getColumns')
             ->willReturn([$mockCol]);
 

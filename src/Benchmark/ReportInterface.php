@@ -45,11 +45,9 @@ interface ReportInterface
     public function getColumns(): array;
 
     /**
-     * Set which column to order the report by
-     * @param ReportColumnInterface $column
-     * @return ReportInterface
+     * @TODO: ADD FUNCTIONALITY FOR SORTING
      */
-    public function setOrdering(ReportColumnInterface $column): self;
+    // public function setOrderBy(ReportColumnInterface $column): self
 
     /**
      * Set report title

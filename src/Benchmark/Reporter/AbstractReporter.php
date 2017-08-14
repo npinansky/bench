@@ -6,6 +6,8 @@ namespace Benchmark\Reporter;
 
 
 use Benchmark\ReportColumnInterface;
+use Benchmark\Reporter\Exception\MissingColumnsException;
+use Benchmark\Reporter\Exception\MissingRowsException;
 use Benchmark\ReporterInterface;
 use Benchmark\ReportFormatterInterface;
 use Benchmark\ReportInterface;
@@ -21,6 +23,13 @@ abstract class AbstractReporter implements ReporterInterface
      * @var ReportInterface
      */
     protected $report;
+
+    public function __construct(ReportInterface $report = null)
+    {
+        if ($report !== null) {
+            $this->report = $report;
+        }
+    }
 
     /**
      * {@inheritdoc}
@@ -45,6 +54,14 @@ abstract class AbstractReporter implements ReporterInterface
      */
     protected function buildReport(): array
     {
+        if (count($this->report->getResults()->getTestNames()) === 0) {
+            throw new MissingRowsException('The results set is empty');
+        }
+
+        if (count($this->report->getColumns()) === 0) {
+            throw new MissingColumnsException('The report has no columns');
+        }
+
         $report = [
             'meta' => [
                 'title'     => $this->report->getTitle(),
@@ -53,6 +70,7 @@ abstract class AbstractReporter implements ReporterInterface
             ],
             'data' => []
         ];
+
 
         $results = $this->report->getResults();
 
@@ -63,6 +81,7 @@ abstract class AbstractReporter implements ReporterInterface
             // Retrieve the execution times
             $sample = $results->getTestResults($testName);
 
+
             // Build columns (each column represents a aggregation)
             foreach ($this->report->getColumns() as $column) {
                 /** @var ReportColumnInterface $column */
@@ -72,7 +91,13 @@ abstract class AbstractReporter implements ReporterInterface
                 }
                 $report['data'][$testName][$colName] = $column->getValue($sample);
             }
+
+            // TODO:  implement column based custom sorting algo
+            ksort($report['data'][$testName]);
         }
+
+        // TODO: implement column based custom sorting algo
+        sort($report['meta']['columns']);
 
         return $report;
     }
