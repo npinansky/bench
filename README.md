@@ -20,7 +20,7 @@ e.g.
 $comp = new FunctionComparator(new FunctionComparatorResults());
 ```
 
-2. Now let's add some code to compare
+2. Now let's add some code to compare whether array_map() or foreach() is more performant
 
 ```
 $arr = range(1,100);
